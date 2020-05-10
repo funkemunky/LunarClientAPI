@@ -1,0 +1,10 @@
+#Made with <3 by Manny
+
+#Restricts to Lunar Client only -- kicks non lunar-client
+restrict: true
+
+#If server is restricted to Lunar Client, they'll receive this kick message.
+kick-message: "&cYou must use Lunar Client to connect to this server."
+
+#When a player joins they'll receive this message upon authentication.
+authenticate: " \n&aYou have connected to the server with &lLunar Client&a.\n "

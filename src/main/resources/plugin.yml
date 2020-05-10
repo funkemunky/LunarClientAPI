@@ -1,0 +1,6 @@
+name: LunarClientAPI
+main: gg.manny.lunar.LunarClientAPI
+author: Manny
+version: ${version}
+softdepend: [Atlas, ProtocolLib]
+commands:
