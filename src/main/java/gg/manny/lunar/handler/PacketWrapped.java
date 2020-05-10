@@ -15,7 +15,8 @@ public abstract class PacketWrapped {
 
     public static PacketWrapped getInstance() {
         if(INSTANCE == null) {
-            if(Bukkit.getPluginManager().isPluginEnabled("Atlas")) {
+            if(Bukkit.getPluginManager().isPluginEnabled("Atlas") && !LunarClientAPI.getInstance().getConfig()
+                    .getBoolean("force-protocollib")) {
                 INSTANCE = new AtlasPayload();
                 Bukkit.getPluginManager().registerEvents(new NormalListener(), LunarClientAPI.getInstance());
             } else if(Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
