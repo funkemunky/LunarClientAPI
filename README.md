@@ -5,3 +5,22 @@ Release of AgentManny's public LunarClientAPI with increased compatibility. Comp
 For 1.7.10, this plugin can run without dependencies. However, for 1.8.X-1.12.2 compatibility, this will require [Atlas](https://github.com/funkemunky/Atlas) *(v1.8.2 or newer)* or [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) *(whichever version is compatible with your server)*.
 
 If you have Atlas or ProtocolLib on your server, LunarClientAPI will always default to Atlas first, then ProtocolLib. This includes servers using a 1.7.10 based Bukkit. 
+
+## Maven Use
+```XML
+<repositories>
+    <repository>
+        <id>funkemunky-releases</id>
+        <url>https://nexus.funkemunky.cc/content/repositories/releases/</url>
+    </repository>
+</repositories>
+<dependencies>
+    <dependency>
+        <groupId>dev.brighten.api</groupId>
+        <artifactId>lunar-client-api</artifactId>
+        <version>1.1</version>
+        <scope>provided</scope>
+    </dependency>
+</dependencies>
+```
+
