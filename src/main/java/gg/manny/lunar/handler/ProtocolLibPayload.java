@@ -2,6 +2,7 @@ package gg.manny.lunar.handler;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
@@ -10,6 +11,7 @@ import gg.manny.lunar.event.PlayerAuthenticateEvent;
 import net.minecraft.util.org.apache.commons.codec.binary.StringUtils;
 import org.bukkit.entity.Player;
 
+import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 
 public class ProtocolLibPayload extends PacketWrapped {
@@ -48,5 +50,12 @@ public class ProtocolLibPayload extends PacketWrapped {
 
         outCustomPayload.getStrings().write(0, "REGISTER");
         outCustomPayload.getByteArrays().write(0, "Lunar-Client".getBytes());
+
+        //TODO Needs testing to see if it errors or not.
+        try {
+            ProtocolLibrary.getProtocolManager().sendServerPacket(player, outCustomPayload);
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 }
