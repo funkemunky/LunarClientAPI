@@ -31,8 +31,10 @@ public class LunarClientAPI extends JavaPlugin {
         saveDefaultConfig();
         getConfig().options().copyDefaults(true);
         restrict = getConfig().getBoolean("restrict", false);
-        kickMessage = ChatColor.translateAlternateColorCodes('&', getConfig().getString("kick-message", "&cYou must use Lunar Client to connect to this server."));
-        authMessage = ChatColor.translateAlternateColorCodes('&', getConfig().getString("authenticate", " \n&aYou have connected to the server with &lLunar Client&a.\n "));
+        kickMessage = ChatColor.translateAlternateColorCodes('&', getConfig()
+                .getString("kick-message", "&cYou must use Lunar Client to connect to this server."));
+        authMessage = ChatColor.translateAlternateColorCodes('&', getConfig()
+                .getString("authenticate", " \n&aYou have connected to the server with &lLunar Client&a.\n "));
 
         ReflectionUtil.registerCommand(this, new CheckCommand(this));
         PacketWrapped.getInstance();
