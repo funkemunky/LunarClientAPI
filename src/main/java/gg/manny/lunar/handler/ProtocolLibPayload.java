@@ -19,7 +19,7 @@ public class ProtocolLibPayload extends PacketWrapped {
     public ProtocolLibPayload() {
         System.out.println("Implementing ProtocolLib support...");
         ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(
-                LunarClientAPI.getInstance(), PacketType.Play.Client.CUSTOM_PAYLOAD) {
+                LunarClientAPI.INSTANCE, PacketType.Play.Client.CUSTOM_PAYLOAD) {
             @Override
             public void onPacketReceiving(PacketEvent event) {
                 PacketContainer container = new PacketContainer(PacketType.Play.Client.CUSTOM_PAYLOAD);
@@ -31,11 +31,11 @@ public class ProtocolLibPayload extends PacketWrapped {
                 String payload = new String(data, StandardCharsets.UTF_8);
 
                 if(payload.contains("Lunar-Client")) {
-                    if (!LunarClientAPI.getInstance().getPlayers().contains(event.getPlayer().getUniqueId())) {
-                        LunarClientAPI.getInstance().getPlayers().add(event.getPlayer().getUniqueId());
+                    if (!LunarClientAPI.INSTANCE.getPlayers().contains(event.getPlayer().getUniqueId())) {
+                        LunarClientAPI.INSTANCE.getPlayers().add(event.getPlayer().getUniqueId());
 
-                        event.getPlayer().sendMessage(LunarClientAPI.getInstance().getAuthMessage());
-                        LunarClientAPI.getInstance().getServer().getPluginManager()
+                        event.getPlayer().sendMessage(LunarClientAPI.INSTANCE.getAuthMessage());
+                        LunarClientAPI.INSTANCE.getServer().getPluginManager()
                                 .callEvent(new PlayerAuthenticateEvent(event.getPlayer()));
 
                     }
@@ -44,6 +44,10 @@ public class ProtocolLibPayload extends PacketWrapped {
         });
     }
 
+    /**
+     * Send PacketPlayOutCustomPayload using ProtocolLib as median for such action.
+     * @param player
+     */
     @Override
     public void sendPayload(Player player) {
         PacketContainer outCustomPayload = new PacketContainer(PacketType.Play.Server.CUSTOM_PAYLOAD);
@@ -57,5 +61,13 @@ public class ProtocolLibPayload extends PacketWrapped {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Removing instances of ProtocolLib listeners.
+     */
+    @Override
+    public void onShutdown() {
+        ProtocolLibrary.getProtocolManager().removePacketListeners(LunarClientAPI.INSTANCE);
     }
 }

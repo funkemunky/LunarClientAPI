@@ -30,7 +30,7 @@ public class PlayerListener implements Listener {
                 .contains("1_7")) {
             Bukkit.getLogger().severe("Without Atlas or ProtocolLib installed, " +
                     "you can only run LunarClientAPI on 1.7.10.");
-            Bukkit.getPluginManager().disablePlugin(LunarClientAPI.getInstance());
+            Bukkit.getPluginManager().disablePlugin(LunarClientAPI.INSTANCE);
         }
     }
 
@@ -47,7 +47,7 @@ public class PlayerListener implements Listener {
                 ReflectionUtil.sendPacket(player, packet);
                 Channel channel = getChannel(player);
                 if (channel != null) {
-                    channel.pipeline().addBefore("packet_handler", "manny", new PacketHandler(player));
+                    channel.pipeline().addBefore("packet_handler", "manny", new PacketHandler.PacketListener(player));
                 }
 
             } catch (Exception e) {
@@ -60,7 +60,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        LunarClientAPI.getInstance().getPlayers().remove(player.getUniqueId());
+        LunarClientAPI.INSTANCE.getPlayers().remove(player.getUniqueId());
 
         EJECT_EXECUTOR.execute(() -> {
             try {

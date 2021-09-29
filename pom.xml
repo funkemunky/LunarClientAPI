@@ -6,7 +6,7 @@
 
     <groupId>dev.brighten.api</groupId>
     <artifactId>lunar-client-api</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
 
     <build>
         <plugins>
@@ -71,7 +71,7 @@
         <dependency>
             <groupId>cc.funkemunky.utils</groupId>
             <artifactId>Atlas</artifactId>
-            <version>1.9</version>
+            <version>1.10.0-SNAPSHOT-b8</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
