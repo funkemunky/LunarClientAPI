@@ -5,6 +5,7 @@ import cc.funkemunky.api.events.AtlasListener;
 import cc.funkemunky.api.events.Listen;
 import cc.funkemunky.api.events.impl.PacketReceiveEvent;
 import cc.funkemunky.api.tinyprotocol.api.Packet;
+import cc.funkemunky.api.tinyprotocol.api.ProtocolVersion;
 import cc.funkemunky.api.tinyprotocol.api.TinyProtocolHandler;
 import cc.funkemunky.api.tinyprotocol.packet.in.WrappedInCustomPayload;
 import cc.funkemunky.api.tinyprotocol.packet.out.WrappedOutCustomPayload;
@@ -45,6 +46,8 @@ public class AtlasPayload extends PacketWrapped {
 
     @Override
     public void sendPayload(Player player) {
-        TinyProtocolHandler.sendPacket(player, new WrappedOutCustomPayload("REGISTER", "Lunar-Client".getBytes()));
+        TinyProtocolHandler.sendPacket(player, new WrappedOutCustomPayload(ProtocolVersion.getGameVersion()
+                .isOrAbove(ProtocolVersion.V1_13) ? "register" : "REGISTER", "Lunar-Client"
+                .getBytes()));
     }
 }
