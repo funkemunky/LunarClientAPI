@@ -18,17 +18,13 @@ import org.bukkit.entity.Player;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-public class AtlasPayload extends PacketWrapped implements AtlasListener {
+public class AtlasPayload extends PacketWrapped {
 
     public AtlasPayload() {
         MiscUtils.printToConsole("&aImplementing Atlas " + Bukkit.getPluginManager().getPlugin("Atlas")
                 .getDescription().getVersion() + " support...");
-        Atlas.getInstance().getEventManager().registerListeners(this, LunarClientAPI.getInstance());
-    }
 
-    @Listen
-    public void onPacket(PacketReceiveEvent event) {
-        if(event.getType().equals(Packet.Client.CUSTOM_PAYLOAD)) {
+        Atlas.getInstance().getPacketProcessor().process(LunarClientAPI.getInstance(), event -> {
             WrappedInCustomPayload packet = new WrappedInCustomPayload(event.getPacket(), event.getPlayer());
 
             if(packet.getData().length == 0 ) return;
@@ -44,7 +40,7 @@ public class AtlasPayload extends PacketWrapped implements AtlasListener {
 
                 }
             }
-        }
+        }, Packet.Client.CUSTOM_PAYLOAD);
     }
 
     @Override
