@@ -17,7 +17,7 @@ If you have Atlas or ProtocolLib on your server, LunarClientAPI will always defa
 <dependencies>
     <dependency>
         <groupId>dev.brighten.api</groupId>
-        <artifactId>lunar-client-api</artifactId>
+        <artifactId>lunarclient-api</artifactId>
         <version>1.1</version>
         <scope>provided</scope>
     </dependency>
